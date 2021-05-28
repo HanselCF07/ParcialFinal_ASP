@@ -1,0 +1,53 @@
+﻿@model ParcialFinal.Models.ViewModels.PersonaViewModel
+@{
+    ViewBag.Title = "EditarPersona";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("EditarPersona", "Persona", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.Id)
+            <div>
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Direccion)
+                @Html.TextBoxFor(d => d.Direccion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Direccion, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Telefono)
+                @Html.TextBoxFor(d => d.Telefono, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Telefono, null, new { @class = "red" })
+            </div>
+
+            <div>
+                @Html.LabelFor(d => d.Correo)
+                @Html.TextBoxFor(d => d.Correo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Correo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Tipo)
+                @Html.TextBoxFor(d => d.Tipo, "", new { @type = "number", @class = "form-control", @min = "1" })
+                @Html.ValidationMessageFor(d => d.Tipo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Fecha_Nacimiento)<br />
+                @Html.EditorFor(d => d.Fecha_Nacimiento, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha_Nacimiento, null, new { @class = "red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+                <a class="btn btn-warning" href="~/Persona/Index">Regresar</a>
+            </div>
+        </div>
+
+    </div>
+}

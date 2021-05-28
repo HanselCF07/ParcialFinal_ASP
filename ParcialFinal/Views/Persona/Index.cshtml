@@ -1,0 +1,50 @@
+﻿@model List<ParcialFinal.Models.ViewModels.ListPersonaViewModel>
+@{
+    ViewBag.Title = "Personas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Persona/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Fecha Nacimiento</th>
+            </tr>
+            @foreach (var oL in Model)
+            {
+                <tr>
+                    <td scope="row">@oL.Id</td>
+                    <td scope="row">@oL.Nombre</td>
+                    <td scope="row">@oL.Direccion</td>
+                    <td scope="row">@oL.Telefono</td>
+                    <td scope="row">@oL.Correo</td>
+                    <td scope="row">@oL.Tipo</td>
+                    <td scope="row">@oL.Fecha_Nacimiento</td>
+                    <td>
+                        <a class="btn btn-default" href="~/Persona/Editar/@oL.Id">Editar</a>
+                        <a class="btn btn-danger" href="~/Persona/Eliminar/@oL.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <br />
+    <a class="btn btn-warning" href="~/">Regresar</a>
+    <br />
+    <br />
+</div>
+

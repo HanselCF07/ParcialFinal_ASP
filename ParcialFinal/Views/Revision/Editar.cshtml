@@ -1,0 +1,49 @@
+﻿@model ParcialFinal.Models.ViewModels.RevisionViewModel
+@{
+    ViewBag.Title = "EditarRevision";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("EditarRevision", "Revision", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.Id)
+            <div>
+                @Html.LabelFor(d => d.Client_Id)
+                @Html.TextBoxFor(d => d.Client_Id, "", new { @type = "number", @class = "form-control", @min = "1" })
+                @Html.ValidationMessageFor(d => d.Client_Id, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Empleado_Id)
+                @Html.TextBoxFor(d => d.Empleado_Id, "", new { @type = "number", @class = "form-control", @min = "1" })
+                @Html.ValidationMessageFor(d => d.Empleado_Id, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Producto_Id)
+                @Html.TextBoxFor(d => d.Producto_Id, "", new { @type = "number", @class = "form-control", @min = "1" })
+                @Html.ValidationMessageFor(d => d.Producto_Id, null, new { @class = "red" })
+            </div>
+            
+            <div>
+                @Html.LabelFor(d => d.Observaciones)
+                @Html.TextBoxFor(d => d.Observaciones, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Observaciones, null, new { @class = "red" })
+            </div>
+
+            <div>
+                @Html.LabelFor(d => d.Fecha_Revision)<br />
+                @Html.EditorFor(d => d.Fecha_Revision, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha_Revision, null, new { @class = "red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+                <a class="btn btn-warning" href="~/Revision/Index">Regresar</a>
+            </div>
+        </div>
+
+    </div>
+}

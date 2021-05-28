@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="Int32" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="revision" Relationship="Self.FK__revision__client__4316F928" FromRole="persona" ToRole="revision" />
+    <NavigationProperty Name="revision1" Relationship="Self.FK__revision__emplea__440B1D61" FromRole="persona" ToRole="revision" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_ensamble" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="voltaje" Type="Int32" Nullable="false" />
+    <Property Name="almacen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Double" Nullable="false" />
+    <NavigationProperty Name="revision" Relationship="Self.FK__revision__produc__44FF419A" FromRole="producto" ToRole="revision" />
+  </EntityType>
+  <EntityType Name="revision">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cliente_id" Type="Int32" Nullable="false" />
+    <Property Name="empleado_id" Type="Int32" Nullable="false" />
+    <Property Name="producto_id" Type="Int32" Nullable="false" />
+    <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_revision" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="persona" Relationship="Self.FK__revision__client__4316F928" FromRole="revision" ToRole="persona" />
+    <NavigationProperty Name="persona1" Relationship="Self.FK__revision__emplea__440B1D61" FromRole="revision" ToRole="persona" />
+    <NavigationProperty Name="producto" Relationship="Self.FK__revision__produc__44FF419A" FromRole="revision" ToRole="producto" />
+  </EntityType>
+  <Association Name="FK__revision__client__4316F928">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="cliente_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revision__emplea__440B1D61">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="empleado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revision__produc__44FF419A">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="producto_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CrudEntitiesParcial" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="persona" EntityType="Self.persona" />
+    <EntitySet Name="producto" EntityType="Self.producto" />
+    <EntitySet Name="revision" EntityType="Self.revision" />
+    <AssociationSet Name="FK__revision__client__4316F928" Association="Self.FK__revision__client__4316F928">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revision__emplea__440B1D61" Association="Self.FK__revision__emplea__440B1D61">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revision__produc__44FF419A" Association="Self.FK__revision__produc__44FF419A">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

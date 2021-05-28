@@ -1,0 +1,54 @@
+﻿@model List<ParcialFinal.Models.ViewModels.ListProductoViewModel>
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Producto/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha Ensamble</th>
+                <th scope="col">Color</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Voltaje</th>
+                <th scope="col">Almacen</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Precio</th>
+            </tr>
+            @foreach (var oL in Model)
+            {
+                <tr>
+                    <td scope="row">@oL.Id</td>
+                    <td scope="row">@oL.Nombre</td>
+                    <td scope="row">@oL.Fecha_Ensamble</td>
+                    <td scope="row">@oL.Color</td>
+                    <td scope="row">@oL.Tipo</td>
+                    <td scope="row">@oL.Voltaje</td>
+                    <td scope="row">@oL.Almacen</td>
+                    <td scope="row">@oL.Modelo</td>
+                    <td scope="row">@oL.Precio</td>
+                    <td>
+                        <a class="btn btn-default" href="~/Producto/Editar/@oL.Id">Editar</a>
+                        <a class="btn btn-danger" href="~/Producto/Eliminar/@oL.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <br />
+    <a class="btn btn-warning" href="~/">Regresar</a>
+    <br />
+    <br />
+</div>
+

@@ -1,0 +1,62 @@
+﻿
+@model ParcialFinal.Models.ViewModels.ProductoViewModel
+@{
+    ViewBag.Title = "Nuevo";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Fecha_Ensamble)<br />
+                @Html.EditorFor(d => d.Fecha_Ensamble, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha_Ensamble, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Color)
+                @Html.TextBoxFor(d => d.Color, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Color, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Tipo)
+                @Html.TextBoxFor(d => d.Tipo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Tipo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Voltaje)
+                @Html.TextBoxFor(d => d.Voltaje, "", new { @type = "number", @class = "form-control", @min = "110" })
+                @Html.ValidationMessageFor(d => d.Voltaje, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Almacen)
+                @Html.TextBoxFor(d => d.Almacen, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Almacen, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Modelo)
+                @Html.TextBoxFor(d => d.Modelo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Modelo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Precio)
+                @Html.TextBoxFor(d => d.Precio, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Precio, null, new { @type = "number", @class = "red", @min = "1" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+                <a class="btn btn-warning" href="~/Producto/Index">Regresar</a>
+            </div>
+        </div>
+
+    </div>
+}

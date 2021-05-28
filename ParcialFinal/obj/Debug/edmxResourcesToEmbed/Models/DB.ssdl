@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo" Type="int" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_ensamble" Type="datetime" Nullable="false" />
+    <Property Name="color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="voltaje" Type="int" Nullable="false" />
+    <Property Name="almacen" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="precio" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="revision">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cliente_id" Type="int" Nullable="false" />
+    <Property Name="empleado_id" Type="int" Nullable="false" />
+    <Property Name="producto_id" Type="int" Nullable="false" />
+    <Property Name="observaciones" Type="text" Nullable="false" />
+    <Property Name="fecha_revision" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__revision__client__4316F928">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="cliente_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revision__emplea__440B1D61">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="empleado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__revision__produc__44FF419A">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="revision" Type="Self.revision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="revision">
+        <PropertyRef Name="producto_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CrudModelStoreContainer">
+    <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="revision" EntityType="Self.revision" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__revision__client__4316F928" Association="Self.FK__revision__client__4316F928">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revision__emplea__440B1D61" Association="Self.FK__revision__emplea__440B1D61">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+    <AssociationSet Name="FK__revision__produc__44FF419A" Association="Self.FK__revision__produc__44FF419A">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="revision" EntitySet="revision" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
